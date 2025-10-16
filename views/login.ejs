@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=\, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <%- include("partials/errors.ejs") %>
+    <a href="/">Home</a>
+    <a href="/register">Register</a>
+    <% if(currentUser) { %>
+    <p>You are already logged in</p>
+    <% } else { %>
+    <form action="/login" method="post">
+      <lable for="email">Email</lable>
+      <input type="email" name="email" required value="<%= body.email %>" />
+      <label for="password">Password</label>
+      <input type="password" name="password" required />
+      <button type="submit">Login</button>
+    </form>
+    <% } %>
+  </body>
+</html>

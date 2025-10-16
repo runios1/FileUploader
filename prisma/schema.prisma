@@ -1,0 +1,39 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+    id              Int          @id @default(autoincrement())
+    email           String       @unique
+    password        String
+    mainDirectory   Directory?   @relation(name: "ownerToMainDirectory", fields: [mainDirectoryId], references: [id])
+    mainDirectoryId Int          @unique
+
+    Directory Directory[]        @relation(name: "ownerToDirectory")
+}
+
+model Directory {
+    id              Int          @id @default(autoincrement())
+    name            String       @default("root")
+    owner           User?        @relation(name: "ownerToDirectory", fields: [userId], references: [id])
+    userId          Int?
+    created         DateTime     @default(now())
+    parent          Directory?   @relation(name: "parentToContents", fields: [parentId], references: [id])
+    parentId        Int?
+    contents        Directory[]  @relation(name: "parentToContents")
+    path            String       @default("root")
+    downloadLink    String?
+    Type            Type          
+
+    ownerOfMain User? @relation(name: "ownerToMainDirectory")
+}
+
+enum Type{
+    File
+    Folder
+}

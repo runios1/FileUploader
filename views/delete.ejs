@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="/drive/<%= directory.path %>">Back</a>
+    <a href="/">Home</a>
+    <% if(!directory.contents || directory.contents.length === 0) { %>
+    <h3>Are you sure you want to delete <%= directory.name %>?</h3>
+    <% } else { %>
+    <h3>
+      Are you sure you want to delete <%= directory.name %> and all its
+      contents?
+    </h3>
+    <% } %>
+    <form action="/drive/delete/<%= directory.id %>" method="post">
+      <button type="submit">Yes</button>
+    </form>
+  </body>
+</html>
