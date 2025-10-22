@@ -29,9 +29,9 @@ const registerPost = [
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).render("register", {
+      return res.status(400).json({
         body: req.body || {},
-        errors: errors.array(),
+        errors: errors,
       });
     }
     try {
@@ -58,10 +58,10 @@ const registerPost = [
         });
       });
 
-      res.redirect("/login");
+      res.status(200).json({ user });
     } catch (error) {
       console.error(error);
-      return res.status(500).render("register", {
+      res.status(500).json({
         body: req.body || {},
         errors: [{ msg: "Error creating user. Please try again." }],
       });

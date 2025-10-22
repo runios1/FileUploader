@@ -10,7 +10,7 @@ async function propertiesGet(req, res) {
     return res.render("properties", { directory });
   } catch (err) {
     console.log(err);
-    return res.status(500);
+    return res.status(500).json({ err });
   }
 }
 

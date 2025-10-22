@@ -1,23 +1,15 @@
 import express from "express";
 import path from "node:path";
-import session from "express-session";
-import passport from "./config/passport.mjs";
 import indexRouter from "./routes/index.mjs";
+import cors from "cors";
 
 const app = express();
+app.use(express.json());
 app.set("views", path.join(import.meta.dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use("/storage", express.static("storage"));
-
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-  })
-);
-app.use(passport.session());
+app.use(cors());
 
 // Get current user in the views.
 app.use((req, res, next) => {

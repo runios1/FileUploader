@@ -32,8 +32,9 @@ const addPost = [
     const dirPath = req.params.dirPath;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      req.session.errors = errors;
-      return res.redirect(`/add/${dirPath}`);
+      return res.status(403).json({
+        errors,
+      });
     }
     try {
       const type = req.file ? Type.File : Type.Folder;
@@ -47,12 +48,13 @@ const addPost = [
       });
 
       if (duplicate) {
-        req.session.errors = [
-          {
-            msg: "Directory can't be with the same name as another directory in the same folder.",
-          },
-        ];
-        return res.redirect(`/drive/add/${dirPath}`);
+        res.status(403).json({
+          errors: [
+            {
+              msg: "Directory can't be with the same name as another directory in the same folder.",
+            },
+          ],
+        });
       }
 
       const directory = await prisma.directory.findFirst({
@@ -62,7 +64,15 @@ const addPost = [
         },
       });
 
-      await prisma.directory.create({
+      if (!directory) {
+        res.status(500).json({
+          errors: [
+            { msg: "Could not find current directory from provided path." },
+          ],
+        });
+      }
+
+      const newDirectory = await prisma.directory.create({
         data: {
           name: req.body.name,
           Type: type,
@@ -73,14 +83,14 @@ const addPost = [
         },
       });
 
-      if (type === Type.Folder) res.redirect(`/drive/${newPath}`);
-      else res.redirect(`/drive/${dirPath}`);
+      res.status(200).json({
+        newDirectory,
+      });
     } catch (err) {
       console.error(err);
-      req.session.errors = [
-        { msg: "Error creating directory. Please try again." },
-      ];
-      return res.redirect(`/drive/add/${dirPath}`);
+      res.status(500).json({
+        errors: [{ msg: "Error creating directory. Please try again." }],
+      });
     }
   },
 ];

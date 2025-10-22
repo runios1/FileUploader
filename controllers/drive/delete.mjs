@@ -14,7 +14,7 @@ async function deleteGet(req, res) {
     res.render("delete", { directory });
   } catch (err) {
     console.log(err);
-    res.status(500);
+    res.status(500).json({ err });
   }
 }
 
@@ -26,8 +26,9 @@ async function deletePost(req, res) {
       },
     });
     if (!directory) {
-      console.error("Prisma couldn't find the directory.");
-      return res.status(500);
+      return res.status(500).json({
+        error: "Prisma couldn't find the directory.",
+      });
     }
     await prisma.directory.deleteMany({
       where: {
@@ -37,10 +38,12 @@ async function deletePost(req, res) {
         },
       },
     });
-    return res.redirect(`/drive/${getParentPath(directory.path)}`);
+    res.status(200).json({
+      directory,
+    });
   } catch (err) {
     console.error(err);
-    return res.status(500);
+    res.status(500).json(err);
   }
 }
 

@@ -14,10 +14,15 @@ async function driveGet(req, res) {
       },
     });
 
-    return res.render("drive", { directory, Type });
+    // return res.render("drive", { directory, Type });
+    return res.status(200).json({
+      directory,
+    });
   } catch (err) {
     console.error(err);
-    return res.status(500);
+    return res.status(500).json({
+      err,
+    });
   }
 }
 

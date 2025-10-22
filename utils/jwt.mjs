@@ -8,8 +8,9 @@ function issueJWT(user) {
     iat: Date.now(),
   };
 
-  const signedToken = jsonwebtoken.sign(payload, process.env.RSA_PRIVATE_KEY, {
+  const signedToken = jsonwebtoken.sign(payload, process.env.JWT_SECRET, {
     expiresIn: expires,
+    algorithm: "HS256",
   });
 
   return {
