@@ -9,14 +9,12 @@ passport.use(
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     },
     async (jwt_payload, done) => {
-      console.log("JWT Payload:", jwt_payload);
       try {
         const user = await prisma.user.findUnique({
           where: {
             id: jwt_payload.sub,
           },
         });
-        console.log("Found user:", user ? "yes" : "no");
 
         if (!user) {
           return done(null, false);
