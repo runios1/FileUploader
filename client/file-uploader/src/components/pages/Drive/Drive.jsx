@@ -21,8 +21,8 @@ export default function Drive() {
         return response.json();
       })
       .then((data) => {
-        if (!data) {
-          throw new Error("The directory does not exist.");
+        if (!data.directory) {
+          throw new Error("This directory does not exist.");
         }
         setDirContents(data.directory.contents);
       })
@@ -31,7 +31,7 @@ export default function Drive() {
   }, [dirPath]);
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>A network error was encountered {error.message}</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div>
