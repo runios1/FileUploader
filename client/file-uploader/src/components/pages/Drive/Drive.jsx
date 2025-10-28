@@ -9,6 +9,7 @@ export default function Drive() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    setError(null);
     fetch(`http://localHost:3000/drive/${dirPath || "root"}`, {
       method: "GET",
       headers: {
