@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 
 export default function Drive() {
   const { "*": dirPath } = useParams();
-  const [dirContents, setDirContents] = useState([]);
+  const [directory, setDirectory] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -25,7 +25,7 @@ export default function Drive() {
         if (!data.directory) {
           throw new Error("This directory does not exist.");
         }
-        setDirContents(data.directory.contents);
+        setDirectory(data.directory);
       })
       .catch((error) => setError(error))
       .finally(() => setLoading(false));
@@ -36,9 +36,12 @@ export default function Drive() {
 
   return (
     <div>
-      {dirContents && dirContents.length > 0 ? (
+      {directory.parent && (
+        <Link to={"/drive/" + directory.parent.path}>Up</Link>
+      )}
+      {directory.contents && directory.contents.length > 0 ? (
         <ul>
-          {dirContents.map((dir) => (
+          {directory.contents.map((dir) => (
             <li key={dir.id}>
               <div>
                 {dir.Type === "Folder" ? (
