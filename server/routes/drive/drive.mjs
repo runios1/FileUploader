@@ -9,6 +9,6 @@ driveRouter.use("/add", addRouter);
 driveRouter.use("/properties", propertiesRouter);
 driveRouter.use("/delete", deleteRouter);
 
-driveRouter.get("/:dirPath", driveGet);
+driveRouter.get("/{*dirPath}", driveGet);
 
 export default driveRouter;

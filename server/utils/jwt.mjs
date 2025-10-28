@@ -13,7 +13,7 @@ function issueJWT(user) {
   });
 
   return {
-    token: "Bearer " + signedToken,
+    token: signedToken,
     expiresIn: expires,
   };
 }

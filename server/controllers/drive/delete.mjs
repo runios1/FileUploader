@@ -34,7 +34,7 @@ async function deletePost(req, res) {
 
     const toDelete = await prisma.directory.findMany({
       where: {
-        userId: req.user.id,
+        userId: req.user,
         path: {
           startsWith: directory.path,
         },
@@ -50,7 +50,7 @@ async function deletePost(req, res) {
     toDelete.forEach(async (dir) => {
       let { error } = await supabase.storage
         .from("files")
-        .remove(`${req.user.id}/${dir.path}`);
+        .remove(`${req.user}/${dir.path}`);
       if (error) {
         console.error(error);
         res.status(500).json({
@@ -61,7 +61,7 @@ async function deletePost(req, res) {
 
     await prisma.directory.deleteMany({
       where: {
-        userId: req.user.id,
+        userId: req.user,
         path: {
           startsWith: directory.path,
         },

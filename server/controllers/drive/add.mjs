@@ -60,7 +60,7 @@ const addPost = [
       });
 
       bb.on("finish", async () => {
-        const newPath = dirPath + "-" + req.body.name;
+        const newPath = dirPath + "/" + req.body.name;
         const type = isFile ? Type.File : Type.Folder;
 
         // Check for duplicates
@@ -85,7 +85,7 @@ const addPost = [
         const directory = await prisma.directory.findFirst({
           where: {
             path: dirPath,
-            userId: req.user.id,
+            userId: req.user,
           },
         });
 
@@ -100,7 +100,7 @@ const addPost = [
         if (isFile) {
           const { error } = await supabase.storage
             .from("files")
-            .upload(`${req.user.id}/${newPath}`, fileBuffer, {
+            .upload(`${req.user}/${newPath}`, fileBuffer, {
               contentType: "application/octet-stream",
             });
 
@@ -116,7 +116,7 @@ const addPost = [
           data: {
             name: req.body.name,
             Type: type,
-            userId: req.user.id,
+            userId: req.user,
             path: newPath,
             parentId: directory.id,
           },

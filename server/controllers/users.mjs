@@ -27,7 +27,7 @@ async function loginPost(req, res) {
 
   const token = issueJWT(user);
 
-  const expSeconds = jsonwebtoken.decode(token.token.slice(7)).exp;
+  const expSeconds = jsonwebtoken.decode(token.token).exp;
 
   res
     .status(200)

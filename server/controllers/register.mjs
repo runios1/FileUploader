@@ -57,6 +57,8 @@ const registerPost = [
         .$transaction(async (tx) => {
           const directory = await tx.directory.create({
             data: {
+              name: "root",
+              path: "root",
               Type: Type.Folder,
             },
           });
