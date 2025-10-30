@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import Add from "./Add/Add";
 import Delete from "./Delete/Delete";
+import Properties from "./Properties/Properties";
 
 export default function Drive() {
   const { "*": dirPath } = useParams();
@@ -62,6 +63,7 @@ export default function Drive() {
               </div>
               <div>
                 <Delete directory={dir} onDeleted={loadDirectory} />
+                <Properties directory={dir} />
               </div>
             </li>
           ))}
