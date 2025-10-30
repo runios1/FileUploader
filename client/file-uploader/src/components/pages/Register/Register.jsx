@@ -71,9 +71,16 @@ export default function Register() {
           id="email"
           required
           autoComplete="email"
+          maxLength={255}
         />
         <label htmlFor="password">Password</label>
-        <input type="password" name="password" id="password" required />
+        <input
+          type="password"
+          name="password"
+          id="password"
+          required
+          maxLength={255}
+        />
         <label htmlFor="confirm">Confirm Password</label>
         <input type="password" name="confirm" id="confirm" required />
         <button type="submit">Register</button>

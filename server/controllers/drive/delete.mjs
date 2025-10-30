@@ -19,7 +19,7 @@ async function deleteGet(req, res) {
   }
 }
 
-async function deletePost(req, res) {
+async function deleteDirectory(req, res) {
   try {
     const directory = await prisma.directory.findUnique({
       where: {
@@ -32,32 +32,32 @@ async function deletePost(req, res) {
       });
     }
 
-    const toDelete = await prisma.directory.findMany({
-      where: {
-        userId: req.user,
-        path: {
-          startsWith: directory.path,
-        },
-      },
-    });
+    // const toDelete = await prisma.directory.findMany({
+    //   where: {
+    //     userId: req.user,
+    //     path: {
+    //       startsWith: directory.path,
+    //     },
+    //   },
+    // });
 
-    if (!toDelete) {
-      return res.status(500).json({
-        error: "Prisma couldn't find any directories to delete.",
-      });
-    }
+    // if (!toDelete) {
+    //   return res.status(500).json({
+    //     error: "Prisma couldn't find any directories to delete.",
+    //   });
+    // }
 
-    toDelete.forEach(async (dir) => {
-      let { error } = await supabase.storage
-        .from("files")
-        .remove(`${req.user}/${dir.path}`);
-      if (error) {
-        console.error(error);
-        res.status(500).json({
-          errors: [{ msg: `Error while deleting ${dir.path} from Supabase.` }],
-        });
-      }
-    });
+    // toDelete.forEach(async (dir) => {
+    //   let { error } = await supabase.storage
+    //     .from("files")
+    //     .remove(`${req.user}/${dir.path}`);
+    //   if (error) {
+    //     console.error(error);
+    //     res.status(500).json({
+    //       errors: [{ msg: `Error while deleting ${dir.path} from Supabase.` }],
+    //     });
+    //   }
+    // });
 
     await prisma.directory.deleteMany({
       where: {
@@ -76,4 +76,4 @@ async function deletePost(req, res) {
   }
 }
 
-export { deleteGet, deletePost };
+export { deleteGet, deleteDirectory };

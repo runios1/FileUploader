@@ -1,10 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../../contexts";
 
 export default function Login() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const { setIsAuthenticated } = useContext(AuthContext);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -34,7 +37,8 @@ export default function Login() {
           throw new Error(data.msg);
         }
 
-        localStorage.setItem("userEmail", data.userEmail);
+        setIsAuthenticated(true);
+
         navigate("/drive/root");
       })
       .catch((error) => setError(error))

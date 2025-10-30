@@ -3,7 +3,7 @@ import prisma from "../../config/prisma.mjs";
 
 async function driveGet(req, res) {
   try {
-    const dirPath = req.params.dirPath.toString().replace(",", "/");
+    const dirPath = req.params.dirPath.toString().replaceAll(",", "/");
     const directory = await prisma.directory.findFirst({
       where: {
         path: dirPath,

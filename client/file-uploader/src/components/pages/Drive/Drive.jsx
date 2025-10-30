@@ -1,6 +1,7 @@
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import Add from "./Add/Add";
+import Delete from "./Delete/Delete";
 
 export default function Drive() {
   const { "*": dirPath } = useParams();
@@ -8,27 +9,33 @@ export default function Drive() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
+  async function loadDirectory() {
     setError(null);
-    fetch(`http://localHost:3000/drive/${dirPath || "root"}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    })
-      .then((response) => {
-        if (!response.ok) throw new Error("Server error.");
-        return response.json();
-      })
-      .then((data) => {
-        if (!data.directory) {
-          throw new Error("This directory does not exist.");
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `http://localhost:3000/drive/${dirPath || "root"}`,
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
         }
-        setDirectory(data.directory);
-      })
-      .catch((error) => setError(error))
-      .finally(() => setLoading(false));
+      );
+      if (response.status === 401)
+        throw new Error("You must be logged in to see this page.");
+      if (!response.ok) throw new Error("Server error.");
+      const data = await response.json();
+      if (!data.directory) throw new Error("This directory does not exist.");
+      setDirectory(data.directory);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    loadDirectory();
   }, [dirPath]);
 
   if (loading) return <p>Loading...</p>;
@@ -36,9 +43,12 @@ export default function Drive() {
 
   return (
     <div>
-      {directory.parent && (
-        <Link to={"/drive/" + directory.parent.path}>Up</Link>
-      )}
+      <div>
+        {directory.parent && (
+          <Link to={"/drive/" + directory.parent.path}>Up</Link>
+        )}
+        <Add />
+      </div>
       {directory.contents && directory.contents.length > 0 ? (
         <ul>
           {directory.contents.map((dir) => (
@@ -49,6 +59,9 @@ export default function Drive() {
                 ) : (
                   <a href={dir.downloadLink}>{dir.name}</a>
                 )}
+              </div>
+              <div>
+                <Delete directory={dir} onDeleted={loadDirectory} />
               </div>
             </li>
           ))}
