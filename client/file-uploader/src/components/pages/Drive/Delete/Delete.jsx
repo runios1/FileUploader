@@ -52,8 +52,13 @@ export default function Delete({ directory, onDeleted }) {
         ) : error ? (
           <p>Error: {error.message}</p>
         ) : (
-          <>
-            <p>Are you sure you want to delete {directory.name}</p>
+          <div>
+            <span>Are you sure you want to delete {directory.name}</span>
+            {directory.Type === "Folder" ? (
+              <span> and all its contents?</span>
+            ) : (
+              <span>?</span>
+            )}
             <div>
               <button onClick={(e) => handleDelete(e)}>Delete</button>
               <button
@@ -65,7 +70,7 @@ export default function Delete({ directory, onDeleted }) {
                 Cancel
               </button>
             </div>
-          </>
+          </div>
         )}
       </ModalDialog>
     </>

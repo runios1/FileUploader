@@ -35,6 +35,32 @@ export default function Drive() {
     }
   }
 
+  async function loadFile(e, dirName) {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `http://localhost:3000/drive/file/${dirPath}/${dirName}`,
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+        }
+      );
+      if (response.status === 401)
+        throw new Error("You must be logged in to download this file.");
+      if (!response.ok) throw new Error("Server error.");
+      const data = await response.json();
+      if (!data.url) throw new Error("Server did not serve a file url.");
+      window.open(data.url, "_blank"); //Open file in new tab
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   useEffect(() => {
     loadDirectory();
   }, [dirPath]);
@@ -48,7 +74,7 @@ export default function Drive() {
         {directory.parent && (
           <Link to={"/drive/" + directory.parent.path}>Up</Link>
         )}
-        <Add />
+        <Add onAdded={loadDirectory} />
       </div>
       {directory.contents && directory.contents.length > 0 ? (
         <ul>
@@ -58,7 +84,9 @@ export default function Drive() {
                 {dir.Type === "Folder" ? (
                   <Link to={"/drive/" + dir.path}>{dir.name}</Link>
                 ) : (
-                  <a href={dir.downloadLink}>{dir.name}</a>
+                  <a href="#" onClick={(e) => loadFile(e, dir.name)}>
+                    {dir.name}
+                  </a>
                 )}
               </div>
               <div>

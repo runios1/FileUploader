@@ -2,9 +2,10 @@ import { body, validationResult } from "express-validator";
 import { Type } from "@prisma/client";
 import multer from "multer";
 import prisma from "../../config/prisma.mjs";
+import supabase from "../../config/supabase.mjs";
 
 const upload = multer({
-  dest: "C:/Users/Run/The Odin Project/Node/FileUploader/storage",
+  storage: multer.memoryStorage(),
 });
 
 const validateName = [
@@ -48,7 +49,7 @@ const addPost = [
       });
 
       if (duplicate) {
-        res.status(403).json({
+        return res.status(403).json({
           errors: [
             {
               msg: "Directory can't be with the same name as another directory in the same folder.",
@@ -65,11 +66,33 @@ const addPost = [
       });
 
       if (!directory) {
-        res.status(500).json({
+        return res.status(500).json({
           errors: [
             { msg: "Could not find current directory from provided path." },
           ],
         });
+      }
+
+      if (type === Type.File) {
+        const { data, error } = await supabase.storage
+          .from("files")
+          .upload(
+            `${req.user}/${directory.path}/${req.body.name}`,
+            req.file.buffer,
+            {
+              contentType: req.file.mimetype,
+            }
+          );
+        if (error) {
+          return res.status(500).json({
+            errors: [
+              {
+                msg:
+                  "Could not upload file to supabase bucket. " + error.message,
+              },
+            ],
+          });
+        }
       }
 
       const newDirectory = await prisma.directory.create({
@@ -83,12 +106,10 @@ const addPost = [
         },
       });
 
-      res.status(200).json({
-        newDirectory,
-      });
+      return res.status(200).json({ newDirectory });
     } catch (err) {
       console.error(err);
-      res.status(500).json({
+      return res.status(500).json({
         errors: [{ msg: "Error creating directory. Please try again." }],
       });
     }

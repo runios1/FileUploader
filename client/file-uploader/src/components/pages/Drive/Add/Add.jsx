@@ -1,7 +1,7 @@
 import { Activity, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 
-export default function Add() {
+export default function Add({ onAdded }) {
   const { "*": dirPath } = useParams();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -18,14 +18,8 @@ export default function Add() {
 
     fetch(`http://localhost:3000/drive/add/${dirPath || "root"}`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       credentials: "include",
-      body: JSON.stringify({
-        name: formData.get("name"),
-        file: formData.get("file"),
-      }),
+      body: formData,
     })
       .then((response) => {
         if (!response.ok) throw new Error("Server error.");
@@ -34,7 +28,8 @@ export default function Add() {
       .then((data) => {
         if (!data.newDirectory)
           throw new Error("Server error, didn't return a directory.");
-        navigate("/drive/" + data.newDirectory.path);
+        if (!formData.get("file")) navigate("/drive/" + data.newDirectory.path);
+        else if (onAdded) onAdded();
       })
       .catch((error) => setError(error))
       .finally(() => setLoading(false));
