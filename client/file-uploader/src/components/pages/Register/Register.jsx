@@ -3,11 +3,7 @@ import { useState } from "react";
 
 export default function Register() {
   const [error, setError] = useState(null);
-  //   const [fieldErrors, setFieldErrors] = useState({
-  //     email: null,
-  //     password: null,
-  //     confirm: null,
-  //   });
+
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 

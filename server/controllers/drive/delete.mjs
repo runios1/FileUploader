@@ -1,6 +1,5 @@
 import prisma from "../../config/prisma.mjs";
 import supabase from "../../config/supabase.mjs";
-import { getParentPath } from "../../utils/path.mjs";
 
 async function deleteGet(req, res) {
   try {

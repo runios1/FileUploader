@@ -16,7 +16,6 @@ async function driveGet(req, res) {
       },
     });
 
-    // return res.render("drive", { directory, Type });
     return res.status(200).json({
       directory,
     });

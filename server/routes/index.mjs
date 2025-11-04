@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { indexGet, logoutGet } from "../controllers/index.mjs";
 import usersRouter from "./users.mjs";
-import registerRouter from "./register.mjs";
 import driveRouter from "./drive/drive.mjs";
 import isAuth from "../middleware/auth.mjs";
 
