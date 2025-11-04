@@ -84,4 +84,4 @@ const registerPost = [
   },
 ];
 
-export { registerGet, registerPost };
+export { registerPost };

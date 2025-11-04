@@ -58,4 +58,4 @@ async function deleteDirectory(req, res) {
   }
 }
 
-export { deleteGet, deleteDirectory };
+export { deleteDirectory };

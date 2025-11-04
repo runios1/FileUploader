@@ -37,4 +37,4 @@ function logoutPost(req, res) {
   res.clearCookie("jwt").json({ success: true });
 }
 
-export { loginGet, loginPost, logoutPost };
+export { loginPost, logoutPost };
