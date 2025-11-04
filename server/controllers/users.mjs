@@ -3,12 +3,6 @@ import bcrypt from "bcryptjs";
 import issueJWT from "../utils/jwt.mjs";
 import jsonwebtoken from "jsonwebtoken";
 
-function loginGet(req, res) {
-  return res.render("login", {
-    body: {},
-  });
-}
-
 async function loginPost(req, res) {
   const user = await prisma.user.findUnique({
     where: {

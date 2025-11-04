@@ -1,23 +1,6 @@
 import prisma from "../../config/prisma.mjs";
 import supabase from "../../config/supabase.mjs";
 
-async function deleteGet(req, res) {
-  try {
-    const directory = await prisma.directory.findUnique({
-      where: {
-        id: parseInt(req.params.dirId),
-      },
-      include: {
-        contents: true,
-      },
-    });
-    res.render("delete", { directory });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ err });
-  }
-}
-
 async function deleteDirectory(req, res) {
   try {
     const directory = await prisma.directory.findUnique({

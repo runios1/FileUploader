@@ -20,10 +20,6 @@ const validateUser = [
     .withMessage("Confirm password did not match original."),
 ];
 
-function registerGet(req, res) {
-  return res.render("register", { body: {} });
-}
-
 const registerPost = [
   validateUser,
   async (req, res) => {

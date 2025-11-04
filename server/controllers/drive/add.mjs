@@ -19,13 +19,6 @@ const validateName = [
     .withMessage("Name should only contains English letters and numbers."),
 ];
 
-function addGet(req, res) {
-  const errors = req.session.errors || [];
-  req.session.errors = [];
-
-  res.render("add", { dirPath: req.params.dirPath, errors: errors });
-}
-
 const addPost = [
   upload.single("file"),
   validateName,

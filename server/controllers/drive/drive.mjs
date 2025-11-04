@@ -1,4 +1,3 @@
-import { Type } from "@prisma/client";
 import prisma from "../../config/prisma.mjs";
 import supabase from "../../config/supabase.mjs";
 
