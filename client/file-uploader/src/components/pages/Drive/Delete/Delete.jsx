@@ -18,7 +18,7 @@ export default function Delete({ directory, onDeleted }) {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/drive/${directory.id}`,
+        `https://fileuploader-85br.onrender.com/drive/${directory.id}`,
         {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },

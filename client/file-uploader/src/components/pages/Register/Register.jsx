@@ -13,7 +13,7 @@ export default function Register() {
 
     setLoading(true);
     setError(null);
-    fetch("http://localhost:3000/users/register", {
+    fetch("https://fileuploader-85br.onrender.com/users/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

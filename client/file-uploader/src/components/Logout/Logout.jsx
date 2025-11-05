@@ -11,7 +11,7 @@ export default function Logout({ children }) {
     e.preventDefault();
 
     try {
-      fetch("http://localhost:3000/users/logout", {
+      fetch("https://fileuploader-85br.onrender.com/users/logout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

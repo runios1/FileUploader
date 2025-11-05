@@ -8,9 +8,12 @@ export default function useAuth() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch("http://localhost:3000/users/auth", {
-          credentials: "include",
-        });
+        const res = await fetch(
+          "https://fileuploader-85br.onrender.com/users/auth",
+          {
+            credentials: "include",
+          }
+        );
         if (!res.ok) throw new Error("Not authenticated.");
         setIsAuthenticated(true);
       } catch {

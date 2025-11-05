@@ -16,11 +16,14 @@ export default function Add({ onAdded }) {
     setError(null);
     setLoading(true);
 
-    fetch(`http://localhost:3000/drive/add/${dirPath || "root"}`, {
-      method: "POST",
-      credentials: "include",
-      body: formData,
-    })
+    fetch(
+      `https://fileuploader-85br.onrender.com/drive/add/${dirPath || "root"}`,
+      {
+        method: "POST",
+        credentials: "include",
+        body: formData,
+      }
+    )
       .then((response) => {
         if (!response.ok) throw new Error("Server error.");
         return response.json();

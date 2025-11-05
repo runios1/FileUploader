@@ -15,7 +15,7 @@ export default function Drive() {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:3000/drive/${dirPath || "root"}`,
+        `https://fileuploader-85br.onrender.com/drive/${dirPath || "root"}`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },
@@ -41,7 +41,7 @@ export default function Drive() {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:3000/drive/file/${dirPath}/${dirName}`,
+        `https://fileuploader-85br.onrender.com/drive/file/${dirPath}/${dirName}`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },
