@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "https://fileupl0ader.netlify.app/",
+    origin: "https://fileupl0ader.netlify.app",
     credentials: true,
   })
 );
