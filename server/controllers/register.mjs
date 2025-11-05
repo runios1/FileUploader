@@ -78,7 +78,11 @@ const registerPost = [
       console.error(error);
       res.status(500).json({
         body: req.body || {},
-        errors: [{ msg: "Error creating user. Please try again." }],
+        errors: [
+          {
+            msg: "Error creating user in database. Please try again. " + error,
+          },
+        ],
       });
     }
   },
