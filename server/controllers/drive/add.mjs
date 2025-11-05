@@ -92,7 +92,6 @@ const addPost = [
         data: {
           name: req.body.name,
           Type: type,
-          downloadLink: req.file ? req.file.path : null,
           userId: req.user,
           path: newPath,
           parentId: directory.id,

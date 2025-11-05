@@ -27,7 +27,6 @@ model Directory {
     parentId        Int?
     contents        Directory[]  @relation(name: "parentToContents")
     path            String       @default("root")
-    downloadLink    String?
     Type            Type          
 
     ownerOfMain User? @relation(name: "ownerToMainDirectory")
