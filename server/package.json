@@ -2,10 +2,10 @@
   "name": "fileuploader",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.mjs",
   "scripts": {
     "build": "npx prisma generate",
-    "start": "npx prisma migrate deploy && node index.js",
+    "start": "npx prisma migrate deploy && node app.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
