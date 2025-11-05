@@ -27,7 +27,8 @@ async function loginPost(req, res) {
     .status(200)
     .cookie("jwt", token.token, {
       httpOnly: true,
-      sameSite: "strict",
+      sameSite: "none",
+      secure: true,
       expires: new Date(expSeconds * 1000),
     })
     .json({ success: true, userEmail: user.email });
