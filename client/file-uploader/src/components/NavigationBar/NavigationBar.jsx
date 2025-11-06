@@ -8,7 +8,7 @@ export default function NavigationBar() {
   const { loading } = useAuth();
   const { isAuthenticated } = useContext(AuthContext);
 
-  if (loading) return null;
+  if (loading) return <p>Loading...</p>;
   return (
     <nav>
       <Link to="/">Home</Link>
