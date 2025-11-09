@@ -83,6 +83,7 @@ export default function Register() {
                   <input
                     type="email"
                     id="email"
+                    name="email"
                     required
                     autoComplete="email"
                     maxLength={255}
@@ -98,6 +99,7 @@ export default function Register() {
                   <input
                     type="password"
                     id="password"
+                    name="password"
                     required
                     maxLength={255}
                     disabled={loading}
@@ -112,6 +114,7 @@ export default function Register() {
                   <input
                     type="password"
                     id="confirm"
+                    name="confirm"
                     required
                     disabled={loading}
                     className={styles.input}

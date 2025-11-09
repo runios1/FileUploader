@@ -73,6 +73,7 @@ export default function Login() {
                   <input
                     type="email"
                     id="email"
+                    name="email"
                     className={styles.input}
                     disabled={loading}
                     required
@@ -86,6 +87,7 @@ export default function Login() {
                   <input
                     type="password"
                     id="password"
+                    name="password"
                     className={styles.input}
                     disabled={loading}
                     required
