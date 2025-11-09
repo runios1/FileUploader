@@ -30,7 +30,7 @@ export default function NavigationBar({ onToggleDarkMode, isDarkMode }) {
                     <Link to="/drive/root" className={styles.navLink}>
                       Drive
                     </Link>
-                    <Logout className={styles.navLink}>Logout</Logout>
+                    <Logout>Logout</Logout>
                   </>
                 ) : (
                   <>

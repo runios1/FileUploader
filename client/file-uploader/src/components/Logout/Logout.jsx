@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts";
+import styles from "../NavigationBar/NavigationBar.module.css";
 
 export default function Logout({ children }) {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ export default function Logout({ children }) {
     }
   }
   return (
-    <a href="#" onClick={(e) => handleClick(e)}>
+    <a href="#" onClick={(e) => handleClick(e)} className={styles.navLink}>
       {children}
     </a>
   );
