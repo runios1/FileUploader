@@ -1,6 +1,7 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../contexts";
+import styles from "./Login.module.css";
 
 export default function Login() {
   const [error, setError] = useState(null);
@@ -44,21 +45,74 @@ export default function Login() {
       .catch((error) => setError(error))
       .finally(() => setLoading(false));
   }
+
   return (
-    <>
-      {loading && <p>Loading in progress</p>}
-      {error ? <p className="error">{error.message}</p> : null}{" "}
-      <form
-        onSubmit={(e) => {
-          handleSubmit(e);
-        }}
-      >
-        <label htmlFor="email">Email</label>
-        <input type="email" name="email" id="email" required />
-        <label htmlFor="password">Password</label>
-        <input type="password" name="password" id="password" required />
-        <button type="submit">Login</button>
-      </form>
-    </>
+    <div className={styles.loginPage}>
+      <div className={styles.container}>
+        <div className={styles.formWrapper}>
+          <div className={styles.formBox}>
+            <div className={styles.decorativeShape1} />
+            <div className={styles.decorativeShape2} />
+
+            <div className={styles.formContent}>
+              <h1 className={styles.title}>Login</h1>
+              <p className={styles.subtitle}>Access your files</p>
+
+              {error && (
+                <div className={styles.errorBox}>
+                  <div className={styles.errorIndicator} />
+                  <p className={styles.errorText}>{error.message}</p>
+                </div>
+              )}
+
+              <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
+                <div className={styles.formGroup}>
+                  <label htmlFor="email" className={styles.label}>
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    className={styles.input}
+                    disabled={loading}
+                    required
+                  />
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label htmlFor="password" className={styles.label}>
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    id="password"
+                    className={styles.input}
+                    disabled={loading}
+                    required
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className={styles.submitButton}
+                  disabled={loading}
+                >
+                  {loading ? "Loading..." : "Login"}
+                </button>
+              </form>
+
+              <div className={styles.footer}>
+                <p className={styles.footerText}>
+                  Don't have an account?{" "}
+                  <Link to="/register" className={styles.link}>
+                    Register
+                  </Link>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

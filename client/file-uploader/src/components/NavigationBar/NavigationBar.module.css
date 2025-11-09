@@ -1,0 +1,204 @@
+.nav {
+  background: white;
+  border-bottom: 4px solid black;
+}
+
+:global(.dark) .nav {
+  background: #1a1a1a;
+  border-bottom: 4px solid #ffffff;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem 1rem;
+}
+
+.navContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 640px) {
+  .leftSection {
+    gap: 2rem;
+  }
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .rightSection {
+    gap: 1rem;
+  }
+}
+
+.logo {
+  font-size: 1.125rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  color: black;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+:global(.dark) .logo {
+  color: white;
+}
+
+@media (min-width: 640px) {
+  .logo {
+    font-size: 1.5rem;
+  }
+}
+
+.navLinks {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 640px) {
+  .navLinks {
+    gap: 1.5rem;
+  }
+}
+
+.loadingText {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  color: #2563eb;
+  font-size: 0.875rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+:global(.dark) .loadingText {
+  color: #60a5fa;
+}
+
+@media (min-width: 640px) {
+  .loadingText {
+    font-size: 1rem;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.navLink {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  color: black;
+  text-decoration: none;
+  transition: color 0.2s;
+  font-size: 0.875rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+:global(.dark) .navLink {
+  color: white;
+}
+
+@media (min-width: 640px) {
+  .navLink {
+    font-size: 1rem;
+  }
+}
+
+.navLink:hover {
+  color: #2563eb;
+}
+
+:global(.dark) .navLink:hover {
+  color: #60a5fa;
+}
+
+.darkModeToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border: 2px solid black;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+:global(.dark) .darkModeToggle {
+  border-color: white;
+  color: white;
+}
+
+.darkModeToggle:hover {
+  background: black;
+  color: white;
+}
+
+:global(.dark) .darkModeToggle:hover {
+  background: white;
+  color: black;
+}
+
+.logoutButton {
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid black;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+:global(.dark) .logoutButton {
+  border-color: white;
+  color: white;
+}
+
+@media (min-width: 640px) {
+  .logoutButton {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+}
+
+.logoutButton:hover {
+  background: black;
+  color: white;
+}
+
+:global(.dark) .logoutButton:hover {
+  background: white;
+  color: black;
+}
