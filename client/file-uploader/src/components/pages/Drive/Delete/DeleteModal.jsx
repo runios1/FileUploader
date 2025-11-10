@@ -46,30 +46,32 @@ export default function Delete({
         setShowModal={setShowModal}
         title="Delete"
       >
-        {loading ? (
-          <p>Loading...</p>
-        ) : error ? (
-          <p>Error: {error.message}</p>
-        ) : (
-          <div className={styles.deleteContent}>
-            <p className={styles.deleteWarning}>
-              Are you sure you want to delete <strong>{directory.name}</strong>?
-              {directory.Type === "Folder" &&
-                " All contents will be permanently deleted."}
-            </p>
-            <div className={styles.modalActions}>
-              <button
-                onClick={() => setShowModal(false)}
-                className={styles.cancelButton}
-              >
-                Cancel
-              </button>
-              <button onClick={handleDelete} className={styles.deleteButton}>
-                Delete
-              </button>
+        <div className={styles.deleteContent}>
+          <p className={styles.deleteWarning}>
+            Are you sure you want to delete <strong>{directory.name}</strong>?
+            {directory.Type === "Folder" &&
+              " All contents will be permanently deleted."}
+          </p>
+
+          {error && (
+            <div className={styles.errorBox}>
+              <div className={styles.errorIndicator} />
+              <p className={styles.errorText}>{error.message}</p>
             </div>
+          )}
+
+          <div className={styles.modalActions}>
+            <button
+              onClick={() => setShowModal(false)}
+              className={styles.cancelButton}
+            >
+              Cancel
+            </button>
+            <button onClick={handleDelete} className={styles.deleteButton}>
+              {loading ? "Deleting..." : "Delete"}
+            </button>
           </div>
-        )}
+        </div>
       </ModalDialog>
     </>
   );

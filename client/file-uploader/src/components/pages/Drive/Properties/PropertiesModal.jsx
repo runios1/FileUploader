@@ -28,7 +28,7 @@ export default function PropertiesModal({
         </div>
         <div className={styles.propertyRow}>
           <span className={styles.propertyLabel}>Type:</span>
-          <span className={styles.propertyValue}>{directory.type}</span>
+          <span className={styles.propertyValue}>{directory.Type}</span>
         </div>
         <div className={styles.propertyRow}>
           <span className={styles.propertyLabel}>Created:</span>

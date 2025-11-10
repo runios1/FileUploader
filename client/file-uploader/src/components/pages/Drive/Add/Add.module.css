@@ -31,6 +31,11 @@
   background: #3b82f6;
 }
 
+.addButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 .menu {
   display: flex;
   gap: 1rem;
@@ -182,6 +187,11 @@
   border-color: #60a5fa;
 }
 
+.input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .fileInput {
   padding: 0.75rem;
   border: 2px solid black;
@@ -211,4 +221,9 @@
 
 .submitButton:hover {
   background: #b91c1c;
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }

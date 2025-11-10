@@ -70,9 +70,6 @@ export default function Drive() {
     loadDirectory();
   }, [dirPath]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-
   return (
     <div className={styles.drivePage}>
       <div className={styles.container}>
@@ -96,70 +93,91 @@ export default function Drive() {
 
         <Add onAdded={loadDirectory} />
 
-        {directory.contents && directory.contents.length > 0 ? (
-          <div className={styles.itemsGrid}>
-            {directory.contents.map((dir) => (
-              <>
-                <div key={dir.id} className={styles.itemCard}>
-                  {dir.Type === "Folder" ? (
-                    <Link to={"/drive/" + dir.path} className={styles.itemLink}>
-                      <div className={styles.itemIcon}>
-                        <Folder size={32} />
-                      </div>
-                      <div className={styles.itemName}>{dir.name}</div>
-                    </Link>
-                  ) : (
-                    <a
-                      href="#"
-                      onClick={(e) => loadFile(e, dir.name)}
-                      className={styles.itemLink}
-                    >
-                      <div className={styles.itemIcon}>
-                        <File size={32} />
-                      </div>
-                      <div className={styles.itemName}>{dir.name}</div>
-                    </a>
-                  )}
-
-                  <div className={styles.itemActions}>
-                    <button
-                      onClick={() => setShowPropertiesModal(true)}
-                      className={styles.itemButton}
-                      aria-label={`Properties of ${dir.name}`}
-                    >
-                      <Info size={16} />
-                      <span className={styles.buttonText}>Properties</span>
-                    </button>
-                    <button
-                      onClick={() => setShowDeleteModal(true)}
-                      className={styles.itemButtonDelete}
-                      aria-label={`Delete ${dir.name}`}
-                    >
-                      <Trash2 size={16} />
-                      <span className={styles.buttonText}>Delete</span>
-                    </button>
-                  </div>
-                </div>
-
-                <PropertiesModal
-                  directory={dir}
-                  showModal={showPropertiesModal}
-                  setShowModal={setShowPropertiesModal}
-                />
-                <DeleteModal
-                  directory={dir}
-                  onDeleted={loadDirectory}
-                  showModal={showDeleteModal}
-                  setShowModal={setShowDeleteModal}
-                />
-              </>
-            ))}
+        {error && (
+          <div className={styles.errorState}>
+            <h3 className={styles.errorTitle}>Error</h3>
+            <p className={styles.errorMessage}>{error.message}</p>
           </div>
-        ) : (
-          <div className={styles.emptyState}>
-            <Folder size={64} className={styles.emptyIcon} />
-            <p className={styles.emptyText}>This folder is empty</p>
+        )}
+
+        {loading && !error && (
+          <div className={styles.loadingState}>
+            <div className={styles.loadingSpinner}></div>
+            <p className={styles.loadingText}>Loading...</p>
           </div>
+        )}
+
+        {!loading && !error && (
+          <>
+            {directory.contents && directory.contents.length > 0 ? (
+              <div className={styles.itemsGrid}>
+                {directory.contents.map((dir) => (
+                  <>
+                    <div key={dir.id} className={styles.itemCard}>
+                      {dir.Type === "Folder" ? (
+                        <Link
+                          to={"/drive/" + dir.path}
+                          className={styles.itemLink}
+                        >
+                          <div className={styles.itemIcon}>
+                            <Folder size={32} />
+                          </div>
+                          <div className={styles.itemName}>{dir.name}</div>
+                        </Link>
+                      ) : (
+                        <a
+                          href="#"
+                          onClick={(e) => loadFile(e, dir.name)}
+                          className={styles.itemLink}
+                        >
+                          <div className={styles.itemIcon}>
+                            <File size={32} />
+                          </div>
+                          <div className={styles.itemName}>{dir.name}</div>
+                        </a>
+                      )}
+
+                      <div className={styles.itemActions}>
+                        <button
+                          onClick={() => setShowPropertiesModal(true)}
+                          className={styles.itemButton}
+                          aria-label={`Properties of ${dir.name}`}
+                        >
+                          <Info size={16} />
+                          <span className={styles.buttonText}>Properties</span>
+                        </button>
+                        <button
+                          onClick={() => setShowDeleteModal(true)}
+                          className={styles.itemButtonDelete}
+                          aria-label={`Delete ${dir.name}`}
+                        >
+                          <Trash2 size={16} />
+                          <span className={styles.buttonText}>Delete</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    <PropertiesModal
+                      directory={dir}
+                      showModal={showPropertiesModal}
+                      setShowModal={setShowPropertiesModal}
+                    />
+                    <DeleteModal
+                      directory={dir}
+                      onDeleted={loadDirectory}
+                      showModal={showDeleteModal}
+                      setShowModal={setShowDeleteModal}
+                    />
+                  </>
+                ))}
+              </div>
+            ) : (
+              <div className={styles.emptyState}>
+                <Folder size={64} className={styles.emptyIcon} />
+                <p className={styles.emptyText}>This folder is empty</p>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>

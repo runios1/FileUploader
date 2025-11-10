@@ -46,8 +46,6 @@ export default function Add({ onAdded }) {
 
   return (
     <div className={styles.addContainer}>
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error.message}</p>}
       <button
         onClick={() => setIsShowingTypeChoice(!isShowingTypeChoice)}
         className={styles.addButton}
@@ -91,6 +89,14 @@ export default function Add({ onAdded }) {
                 <X size={20} />
               </button>
             </div>
+
+            {error && (
+              <div className={styles.errorBox}>
+                <div className={styles.errorIndicator} />
+                <p className={styles.errorText}>{error.message}</p>
+              </div>
+            )}
+
             <form onSubmit={(e) => handleAdd(e)} className={styles.form}>
               <div className={styles.formGroup}>
                 <label htmlFor="name" className={styles.label}>
@@ -137,6 +143,14 @@ export default function Add({ onAdded }) {
                 <X size={20} />
               </button>
             </div>
+
+            {error && (
+              <div className={styles.errorBox}>
+                <div className={styles.errorIndicator} />
+                <p className={styles.errorText}>{error.message}</p>
+              </div>
+            )}
+
             <form onSubmit={(e) => handleAdd(e)} className={styles.form}>
               <div className={styles.formGroup}>
                 <label htmlFor="name" className={styles.label}>
@@ -153,7 +167,7 @@ export default function Add({ onAdded }) {
               </div>
 
               <button type="submit" className={styles.submitButton}>
-                Create
+                {loading ? "Creating..." : "Create"}
               </button>
             </form>
           </div>
