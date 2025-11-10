@@ -35,7 +35,13 @@ async function loginPost(req, res) {
 }
 
 function logoutPost(req, res) {
-  res.clearCookie("jwt").json({ success: true });
+  res
+    .clearCookie("jwt", {
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+    })
+    .json({ success: true });
 }
 
 export { loginPost, logoutPost };
