@@ -26,11 +26,9 @@ export default function Add({ onAdded }) {
         body: formData,
       }
     )
-      .then((response) => {
-        if (!response.ok) throw new Error(response.errors);
-        return response.json();
-      })
-      .then((data) => {
+      .then(async (response) => {
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.errors[0]);
         if (!data.newDirectory)
           throw new Error("Server error, didn't return a directory.");
         if (!formData.get("file")) navigate("/drive/" + data.newDirectory.path);
