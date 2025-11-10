@@ -1,4 +1,4 @@
-import { Activity, useState } from "react";
+import { Activity, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Plus, File, Folder, X } from "lucide-react";
 import styles from "./Add.module.css";
@@ -9,6 +9,10 @@ export default function Add({ onAdded }) {
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsShowingTypeChoice(false);
+  }, [dirPath]);
 
   function handleAdd(e) {
     e.preventDefault();
