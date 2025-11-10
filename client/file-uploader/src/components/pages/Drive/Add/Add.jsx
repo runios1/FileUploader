@@ -27,7 +27,7 @@ export default function Add({ onAdded }) {
       }
     )
       .then((response) => {
-        if (!response.ok) throw new Error("Server error.");
+        if (!response.ok) throw new Error(response.errors[0]);
         return response.json();
       })
       .then((data) => {
