@@ -1,4 +1,4 @@
-import { Activity, useEffect, useState } from "react";
+import { Activity, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Plus, File, Folder, X } from "lucide-react";
 import styles from "./Add.module.css";
@@ -9,10 +9,6 @@ export default function Add({ onAdded }) {
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    setIsShowingTypeChoice(false);
-  }, [dirPath]);
 
   function handleAdd(e) {
     e.preventDefault();
@@ -39,6 +35,8 @@ export default function Add({ onAdded }) {
           throw new Error("Server error, didn't return a directory.");
         if (!formData.get("file")) navigate("/drive/" + data.newDirectory.path);
         else if (onAdded) onAdded();
+
+        setIsShowingTypeChoice(false);
       })
       .catch((error) => setError(error))
       .finally(() => setLoading(false));
