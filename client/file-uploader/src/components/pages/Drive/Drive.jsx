@@ -144,7 +144,6 @@ export default function Drive() {
                           aria-label={`Properties of ${dir.name}`}
                         >
                           <Info size={16} />
-                          <span className={styles.buttonText}>Properties</span>
                         </button>
                         <button
                           onClick={() => setShowDeleteModal(true)}
@@ -152,7 +151,6 @@ export default function Drive() {
                           aria-label={`Delete ${dir.name}`}
                         >
                           <Trash2 size={16} />
-                          <span className={styles.buttonText}>Delete</span>
                         </button>
                       </div>
                     </div>
