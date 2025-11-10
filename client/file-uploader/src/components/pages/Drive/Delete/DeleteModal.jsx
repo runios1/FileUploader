@@ -1,18 +1,17 @@
 import { useState } from "react";
 import ModalDialog from "../../../ModalDialog/ModalDialog";
+import styles from "./DeleteModal.module.css";
 
-export default function Delete({ directory, onDeleted }) {
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+export default function Delete({
+  directory,
+  onDeleted,
+  showModal,
+  setShowModal,
+}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  function toggleDeleteModal(e) {
-    e.preventDefault();
-    setShowDeleteModal(!showDeleteModal);
-  }
-
-  async function handleDelete(e) {
-    e.preventDefault();
+  async function handleDelete() {
     setError(null);
     setLoading(true);
 
@@ -31,7 +30,7 @@ export default function Delete({ directory, onDeleted }) {
         throw new Error(text || "Server error.");
       }
 
-      setShowDeleteModal(false);
+      setShowModal(false);
       if (onDeleted) onDeleted();
     } catch (err) {
       setError(err);
@@ -42,32 +41,31 @@ export default function Delete({ directory, onDeleted }) {
 
   return (
     <>
-      <button onClick={(e) => toggleDeleteModal(e)}>Delete</button>
       <ModalDialog
-        showModal={showDeleteModal}
-        setShowModal={setShowDeleteModal}
+        showModal={showModal}
+        setShowModal={setShowModal}
+        title="Delete"
       >
         {loading ? (
           <p>Loading...</p>
         ) : error ? (
           <p>Error: {error.message}</p>
         ) : (
-          <div>
-            <span>Are you sure you want to delete {directory.name}</span>
-            {directory.Type === "Folder" ? (
-              <span> and all its contents?</span>
-            ) : (
-              <span>?</span>
-            )}
-            <div>
-              <button onClick={(e) => handleDelete(e)}>Delete</button>
+          <div className={styles.deleteContent}>
+            <p className={styles.deleteWarning}>
+              Are you sure you want to delete <strong>{directory.name}</strong>?
+              {directory.Type === "Folder" &&
+                " All contents will be permanently deleted."}
+            </p>
+            <div className={styles.modalActions}>
               <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setShowDeleteModal(false);
-                }}
+                onClick={() => setShowModal(false)}
+                className={styles.cancelButton}
               >
                 Cancel
+              </button>
+              <button onClick={handleDelete} className={styles.deleteButton}>
+                Delete
               </button>
             </div>
           </div>

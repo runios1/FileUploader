@@ -1,0 +1,47 @@
+.propertiesContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.propertyRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem 0;
+  border-bottom: 2px solid #f3f4f6;
+}
+
+:global(.dark) .propertyRow {
+  border-color: #374151;
+}
+
+.propertyRow:last-child {
+  border-bottom: none;
+}
+
+@media (min-width: 640px) {
+  .propertyRow {
+    flex-direction: row;
+    gap: 1rem;
+  }
+}
+
+.propertyLabel {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: black;
+  min-width: 100px;
+}
+
+:global(.dark) .propertyLabel {
+  color: white;
+}
+
+.propertyValue {
+  word-break: break-word;
+  color: #374151;
+}
+
+:global(.dark) .propertyValue {
+  color: #d1d5db;
+}

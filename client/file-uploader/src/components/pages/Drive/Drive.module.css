@@ -1,0 +1,311 @@
+.drivePage {
+  min-height: calc(100vh - 73px);
+  background: white;
+  padding: 2rem 1rem;
+}
+
+:global(.dark) .drivePage {
+  background: #0a0a0a;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.pathDisplay {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.pathIcon {
+  color: #2563eb;
+  flex-shrink: 0;
+}
+
+:global(.dark) .pathIcon {
+  color: #60a5fa;
+}
+
+.path {
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  color: black;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+:global(.dark) .path {
+  color: white;
+}
+
+@media (max-width: 640px) {
+  .path {
+    font-size: 1rem;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: white;
+  border: 2px solid black;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+:global(.dark) .actionButton {
+  background: #0a0a0a;
+  border-color: white;
+  color: white;
+}
+
+.actionButton:hover:not(:disabled) {
+  background: black;
+  color: white;
+}
+
+:global(.dark) .actionButton:hover:not(:disabled) {
+  background: white;
+  color: black;
+}
+
+.actionButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+  .actionButton {
+    padding: 0.75rem 1rem;
+  }
+}
+
+.buttonText {
+  display: inline;
+}
+
+@media (max-width: 480px) {
+  .buttonText {
+    display: none;
+  }
+}
+
+.itemsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .itemsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+}
+
+.itemCard {
+  border: 3px solid black;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s;
+}
+
+:global(.dark) .itemCard {
+  background: #1a1a1a;
+  border-color: white;
+}
+
+.itemCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0 black;
+}
+
+:global(.dark) .itemCard:hover {
+  box-shadow: 4px 4px 0 white;
+}
+
+.itemLink {
+  padding: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+@media (max-width: 640px) {
+  .itemLink {
+    padding: 1rem;
+  }
+}
+
+.itemIcon {
+  color: #2563eb;
+}
+
+:global(.dark) .itemIcon {
+  color: #60a5fa;
+}
+
+.itemName {
+  font-weight: 700;
+  text-transform: uppercase;
+  word-break: break-word;
+  color: black;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+:global(.dark) .itemName {
+  color: white;
+}
+
+@media (max-width: 640px) {
+  .itemName {
+    font-size: 0.75rem;
+  }
+}
+
+.itemActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 3px solid black;
+}
+
+:global(.dark) .itemActions {
+  border-color: white;
+}
+
+.itemButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0.5rem;
+  background: white;
+  border: none;
+  border-right: 3px solid black;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 0;
+}
+
+:global(.dark) .itemButton {
+  background: #1a1a1a;
+  border-color: white;
+  color: white;
+}
+
+.itemButton:hover {
+  background: #2563eb;
+  color: white;
+}
+
+:global(.dark) .itemButton:hover {
+  background: #60a5fa;
+  color: black;
+}
+
+@media (max-width: 640px) {
+  .itemButton {
+    padding: 0.625rem 0.25rem;
+    font-size: 0.75rem;
+    gap: 0.25rem;
+  }
+}
+
+.itemButtonDelete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0.5rem;
+  background: white;
+  border: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 0;
+}
+
+:global(.dark) .itemButtonDelete {
+  background: #1a1a1a;
+  color: white;
+}
+
+.itemButtonDelete:hover {
+  background: #dc2626;
+  color: white;
+}
+
+@media (max-width: 640px) {
+  .itemButtonDelete {
+    padding: 0.625rem 0.25rem;
+    font-size: 0.75rem;
+    gap: 0.25rem;
+  }
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  gap: 1rem;
+}
+
+.emptyIcon {
+  color: #d1d5db;
+}
+
+.emptyText {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #9ca3af;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .emptyText {
+    font-size: 1rem;
+  }
+}

@@ -1,5 +1,7 @@
 import { Activity, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import { Plus, File, Folder, X } from "lucide-react";
+import styles from "./Add.module.css";
 
 export default function Add({ onAdded }) {
   const { "*": dirPath } = useParams();
@@ -43,62 +45,119 @@ export default function Add({ onAdded }) {
   const [isShowingFolderForm, setIsShowingFolderForm] = useState(false);
 
   return (
-    <div>
+    <div className={styles.addContainer}>
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error.message}</p>}
-      <button onClick={() => setIsShowingTypeChoice(!isShowingTypeChoice)}>
-        Add
+      <button
+        onClick={() => setIsShowingTypeChoice(!isShowingTypeChoice)}
+        className={styles.addButton}
+      >
+        <Plus size={20} />
+        <span>Add</span>
       </button>
+
       <Activity mode={isShowingTypeChoice ? "visible" : "hidden"}>
-        <div>
+        <div className={styles.menu}>
           <button
             onClick={() => {
               setIsShowingFileForm(true);
               setIsShowingFolderForm(false);
             }}
+            className={styles.menuButton}
           >
-            File
+            <File size={20} />
+            <span>File</span>
           </button>
           <button
             onClick={() => {
               setIsShowingFolderForm(true);
               setIsShowingFileForm(false);
             }}
+            className={styles.menuButton}
           >
-            Folder
+            <Folder size={20} />
+            <span>Folder</span>
           </button>
         </div>
 
-        <div>
-          <Activity mode={isShowingFileForm ? "visible" : "hidden"}>
-            <form onSubmit={(e) => handleAdd(e)}>
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                maxLength={255}
-              />
-              <label htmlFor="file">File</label>
-              <input type="file" name="file" id="file" required />
-              <button type="submit">Submit</button>
+        <Activity mode={isShowingFileForm ? "visible" : "hidden"}>
+          <div className={styles.formBox}>
+            <div className={styles.formHeader}>
+              <h3 className={styles.formTitle}>Upload File</h3>
+              <button
+                onClick={() => setIsShowingFileForm(false)}
+                className={styles.closeButton}
+              >
+                <X size={20} />
+              </button>
+            </div>
+            <form onSubmit={(e) => handleAdd(e)} className={styles.form}>
+              <div className={styles.formGroup}>
+                <label htmlFor="name" className={styles.label}>
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  maxLength={255}
+                  className={styles.input}
+                />
+              </div>
+
+              <div className={styles.formGroup}>
+                <label htmlFor="file" className={styles.label}>
+                  File
+                </label>
+                <input
+                  type="file"
+                  name="file"
+                  id="file"
+                  required
+                  className={styles.fileInput}
+                />
+              </div>
+
+              <button type="submit" className={styles.submitButton}>
+                Upload
+              </button>
             </form>
-          </Activity>
-          <Activity mode={isShowingFolderForm ? "visible" : "hidden"}>
-            <form onSubmit={(e) => handleAdd(e)}>
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                maxLength={255}
-              />
-              <button type="submit">Submit</button>
+          </div>
+        </Activity>
+
+        <Activity mode={isShowingFolderForm ? "visible" : "hidden"}>
+          <div className={styles.formBox}>
+            <div className={styles.formHeader}>
+              <h3 className={styles.formTitle}>Create Folder</h3>
+              <button
+                onClick={() => setIsShowingFolderForm(false)}
+                className={styles.closeButton}
+              >
+                <X size={20} />
+              </button>
+            </div>
+            <form onSubmit={(e) => handleAdd(e)} className={styles.form}>
+              <div className={styles.formGroup}>
+                <label htmlFor="name" className={styles.label}>
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  maxLength={255}
+                  className={styles.input}
+                />
+              </div>
+
+              <button type="submit" className={styles.submitButton}>
+                Create
+              </button>
             </form>
-          </Activity>
-        </div>
+          </div>
+        </Activity>
       </Activity>
     </div>
   );
