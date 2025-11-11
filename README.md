@@ -17,3 +17,5 @@ FileUploader is a modern web application that makes managing and sharing your fi
   - **Backend**: Render Web Service and database hosting
   
   - **Frontend**: Netlify
+
+Designed with the help of Figma Make.
