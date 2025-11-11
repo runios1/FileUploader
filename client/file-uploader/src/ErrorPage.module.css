@@ -1,0 +1,194 @@
+.notFoundPage {
+  min-height: calc(100vh - 73px);
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+:global(.dark) .notFoundPage {
+  background: #0a0a0a;
+}
+
+.container {
+  max-width: 600px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.decorativeShape1 {
+  position: absolute;
+  top: -80px;
+  left: -60px;
+  width: 120px;
+  height: 120px;
+  background: #eab308;
+  transform: rotate(45deg);
+  z-index: 0;
+}
+
+@media (max-width: 640px) {
+  .decorativeShape1 {
+    width: 80px;
+    height: 80px;
+    top: -40px;
+    left: -40px;
+  }
+}
+
+.decorativeShape2 {
+  position: absolute;
+  bottom: -50px;
+  right: -50px;
+  width: 100px;
+  height: 100px;
+  background: #2563eb;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+:global(.dark) .decorativeShape2 {
+  background: #60a5fa;
+}
+
+@media (max-width: 640px) {
+  .decorativeShape2 {
+    width: 70px;
+    height: 70px;
+    bottom: -35px;
+    right: -35px;
+  }
+}
+
+.decorativeShape3 {
+  position: absolute;
+  top: 50%;
+  right: -90px;
+  width: 0;
+  height: 0;
+  border-left: 60px solid transparent;
+  border-right: 60px solid transparent;
+  border-bottom: 104px solid #dc2626;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+@media (max-width: 640px) {
+  .decorativeShape3 {
+    border-left-width: 40px;
+    border-right-width: 40px;
+    border-bottom-width: 70px;
+    right: -60px;
+  }
+}
+
+.content {
+  background: white;
+  border: 4px solid black;
+  padding: 3rem 2rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+:global(.dark) .content {
+  background: #1a1a1a;
+  border-color: white;
+}
+
+@media (max-width: 640px) {
+  .content {
+    padding: 2rem 1rem;
+  }
+}
+
+.errorCode {
+  font-size: 8rem;
+  font-weight: 900;
+  margin: 0 0 1rem 0;
+  color: #dc2626;
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+@media (max-width: 640px) {
+  .errorCode {
+    font-size: 5rem;
+  }
+}
+
+.errorTitle {
+  font-size: 2rem;
+  font-weight: 900;
+  margin: 0 0 1rem 0;
+  color: black;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+:global(.dark) .errorTitle {
+  color: white;
+}
+
+@media (max-width: 640px) {
+  .errorTitle {
+    font-size: 1.5rem;
+  }
+}
+
+.errorMessage {
+  font-size: 1.125rem;
+  margin: 0 0 2rem 0;
+  color: #374151;
+  line-height: 1.6;
+}
+
+:global(.dark) .errorMessage {
+  color: #d1d5db;
+}
+
+@media (max-width: 640px) {
+  .errorMessage {
+    font-size: 1rem;
+  }
+}
+
+.homeButton {
+  background: #2563eb;
+  color: white;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 1.125rem;
+  padding: 1rem 2.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.homeButton:hover {
+  background: #1e40af;
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0 black;
+}
+
+:global(.dark) .homeButton {
+  background: #60a5fa;
+  color: black;
+}
+
+:global(.dark) .homeButton:hover {
+  background: #3b82f6;
+  box-shadow: 4px 4px 0 white;
+}
+
+@media (max-width: 640px) {
+  .homeButton {
+    font-size: 1rem;
+    padding: 0.875rem 2rem;
+  }
+}
