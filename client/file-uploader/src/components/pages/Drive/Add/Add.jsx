@@ -93,7 +93,7 @@ export default function Add({ onAdded }) {
             {error && (
               <div className={styles.errorBox}>
                 <div className={styles.errorIndicator} />
-                <p className={styles.errorText}>{error.msg}</p>
+                <p className={styles.errorText}>{String(error)}</p>
               </div>
             )}
 
@@ -147,7 +147,7 @@ export default function Add({ onAdded }) {
             {error && (
               <div className={styles.errorBox}>
                 <div className={styles.errorIndicator} />
-                <p className={styles.errorText}>{error}</p>
+                <p className={styles.errorText}>{String(error)}</p>
               </div>
             )}
 
