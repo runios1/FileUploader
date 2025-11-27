@@ -14,7 +14,7 @@ FileUploader is a modern web application that makes managing and sharing your fi
 
 **Deployment**:
 
-  - **Backend**: Render Web Service and database hosting
+  - **Backend**: Render Web Service and Neon database hosting
   
   - **Frontend**: Netlify
 
