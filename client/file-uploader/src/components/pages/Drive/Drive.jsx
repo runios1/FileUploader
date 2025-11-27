@@ -81,8 +81,11 @@ export default function Drive() {
           <div className={styles.actions}>
             <Link
               to={"/drive/" + (directory.parent && directory.parent.path)}
-              className={styles.actionButton}
-              disabled={directory.parent == null}
+              className={`${styles.actionButton} ${
+                !directory.parent ? styles.disabled : ""
+              }`}
+              onClick={(e) => !directory.parent && e.preventDefault()}
+              aria-disabled={!directory.parent}
               aria-label="Go up one level"
             >
               <ArrowUp size={20} />
