@@ -82,7 +82,7 @@ export default function Drive() {
             <Link
               to={"/drive/" + (directory.parent && directory.parent.path)}
               className={styles.actionButton}
-              disabled={!directory.parent}
+              disabled={directory.parent == null}
               aria-label="Go up one level"
             >
               <ArrowUp size={20} />
